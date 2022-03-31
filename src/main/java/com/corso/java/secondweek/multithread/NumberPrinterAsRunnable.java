@@ -1,6 +1,7 @@
 package com.corso.java.secondweek.multithread;
 
-import static com.logger.java.LOG.L;
+import static com.corso.java.secondweek.utils.LOG.L;
+
 
 public class NumberPrinterAsRunnable implements Runnable {
     int min;

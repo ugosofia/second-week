@@ -51,7 +51,7 @@ public class DBInsert implements Runnable{
 
         public Connection connect() throws IOException {
             Connection conn = null;
-            rP.read();
+            //rP.read();
             try {
                 Class.forName(rP.getProperties().getProperty("db.driverUrl")).newInstance();
                 conn = DriverManager.getConnection(rP.getProperties().getProperty("db.url"), rP.getProperties().getProperty("db.username"), rP.getProperties().getProperty("db.password"));
