@@ -1,9 +1,8 @@
-package com.corso.java.secondweek.annotation;
+package com.corso.teoria.annotation;
 
 import com.corso.java.secondweek.utils.LOG;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
 
 @TestAnnotation
 @SingleTestAnnotation (item = " ")
