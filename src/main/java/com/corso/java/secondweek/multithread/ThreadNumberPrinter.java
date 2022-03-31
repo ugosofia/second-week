@@ -6,12 +6,12 @@ public class ThreadNumberPrinter extends Thread {
 
     public ThreadNumberPrinter(int min, int max){
         this.max = max;
-        this.min = max;
+        this.min = min;
     }
 
     public void run() {
         for (int i = min; i < max; i++) {
-            System.out.println(String.valueOf(i));
+            System.out.println((i));
         }
     }
 
