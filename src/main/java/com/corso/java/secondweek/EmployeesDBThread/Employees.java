@@ -7,8 +7,8 @@ import lombok.Data;
 public class Employees{
 
     private int id;
-    private int name;
-    private int lastname;
+    private String name;
+    private String lastname;
 
 
     public void print() {
