@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 
 public class JPAUtils {
-    private static final String PERSISTENCE_UNIT_NAME = "PERSISTENCE";
+    private static final String PERSISTENCE_UNIT_NAME = "persistence";
     private static EntityManagerFactory factory;
 
     public static EntityManagerFactory getEntityManagerFactory() {
