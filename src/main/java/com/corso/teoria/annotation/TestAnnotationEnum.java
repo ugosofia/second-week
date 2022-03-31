@@ -1,4 +1,4 @@
-package com.corso.java.secondweek.annotation;
+package com.corso.teoria.annotation;
 
 public enum TestAnnotationEnum {
 

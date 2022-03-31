@@ -51,7 +51,7 @@ public class DBcreate implements Runnable{
 
     public Connection connect() throws IOException {
         Connection conn = null;
-        rp.read();
+        //rp.read();
         try {
             Class.forName(rp.getProperties().getProperty("db.driverUrl")).newInstance();
             conn = DriverManager.getConnection(rp.getProperties().getProperty("db.url"), rp.getProperties().getProperty("db.username"), rp.getProperties().getProperty("db.password"));
