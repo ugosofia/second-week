@@ -2,6 +2,7 @@ package com.corso.java.secondweek.EmployeesDBThread;
 
 import com.corso.java.secondweek.utils.ConnectDB;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,8 @@ public class CreateDB {
                 //Esegue la query
                 stmt.executeUpdate(CREATE_DB_DDL);
             }
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
         }
     }
 }

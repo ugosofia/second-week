@@ -36,10 +36,13 @@ public class CRUDTableEmployees {
                 ps.setString(2, lastname);
                 return ps.execute();
             }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
-    public Optional<Employees> first_select(Optional<Integer> limit) throws SQLException {
+    public Optional<Employees> first_select(Optional<Integer> limit) throws SQLException, ClassNotFoundException, IOException {
         try (Connection con = ConnectDB.connect()) {
             PreparedStatement pstmt = con.prepareStatement(SELECT_DB);
             pstmt.setInt(1, id);
@@ -48,15 +51,14 @@ public class CRUDTableEmployees {
                 if (!rs.next()) {
                     return Optional.empty();
                 }
+
                 return Optional.of(
                         Employees.builder()
                                 .id(id).name(rs.getString("name")).lastname(rs.getString("surname"))
                                 .build());
             }
+
+
         }
-
-
-
-
     }
 }
