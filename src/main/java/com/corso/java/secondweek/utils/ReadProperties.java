@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class ReadProperties {
 
-    private static LOG L;
+    private static Logger L;
     private Properties properties;
     private InputStream inputStream;
     private String resourceName;
@@ -33,7 +33,7 @@ public class ReadProperties {
     /**
      * @return - L
      */
-    public static LOG getL() {
+    public static Logger getL() {
         return L;
     }
 
@@ -41,7 +41,7 @@ public class ReadProperties {
      * initialize variables
      */
     public void init() {
-        L = LOG.getInstance();
+        L = Logger.getInstance();
         this.properties = new Properties();
     }
 

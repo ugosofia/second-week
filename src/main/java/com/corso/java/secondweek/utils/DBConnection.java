@@ -9,7 +9,7 @@ public class DBConnection {
     private static Statement statement;
     private static ResultSet resultSet;
     private static PreparedStatement preparedStatement;
-    private static LOG L = LOG.getInstance();
+    private static Logger L = Logger.getInstance();
 
     public static Statement connect() throws SQLException {
         try {
@@ -21,7 +21,7 @@ public class DBConnection {
             }else{
                 L.debug("You have invoked more times DBConnection.connect();");
             }
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException | IOException ex) {
             L.err("SQLException: " + ex.getMessage());
         }
 
