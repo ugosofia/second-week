@@ -1,6 +1,6 @@
 package com.corso.java.secondweek.multithread;
 
-import static com.corso.java.secondweek.utils.LOG.L;
+import static com.corso.java.secondweek.utils.Logger.L;
 
 
 public class NumberPrinterAsRunnable implements Runnable {
