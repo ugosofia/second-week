@@ -1,79 +1,62 @@
 package com.corso.java.secondweek.EmployeesDBThread;
 
-import com.corso.java.secondweek.utils.DBConnection;
+import com.corso.java.secondweek.utils.ConnectDB;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
-import static com.corso.java.secondweek.utils.DBConnection.getPreparedStatement;
-import static com.corso.java.secondweek.utils.DBConnection.getStatement;
 
-public class CRUDTableEmployees extends EmployeesAbstract {
+
+public class CRUDTableEmployees {
+    private final static String SELECT_DB = "SELECT * FROM employees WHERE id = ?";
+    private final static String INSERT_DB = "INSERT INTO employees (name, surname) values (?, ?)";
+    private final static String SELECT_DB1 = "SELECT * FROM employees ORDER BY surname, name";
 
     Scanner in = new Scanner(System.in);
     private String query;
-    private EmployeesAbstract em;
     private PreparedStatement pS;
     int id;
     String name, lastname;
 
-    public CRUDTableEmployees() throws SQLException {
-        pS = (PreparedStatement) connect();
-    }
 
-
-    @Override
-    void insert() throws SQLException, IOException {
-
-        query= readProp("application.properties", "insert_sql");
-
-
-        int nInsert;
-        try {
-            System.out.print("Quanti inserimenti vuoi effettuare?: ");
-            nInsert = in.nextInt();
-            for (int i = 0; i < nInsert; i++) {
-                System.out.print("\nInserisci id: ");
-                id = in.nextInt();
-                System.out.print("\nInserisci nome: ");
-                name = in.next();
-                System.out.print("\nInserisci cognome: ");
-                lastname = in.next();
-
-
-                pS.setInt(1, id);
-                pS.setString(2, name);
-                pS.setString(3, lastname);
-
-
+    /**
+     * @return
+     * @throws SQLException
+     * @throws IOException
+     */
+    boolean insert() throws SQLException, IOException {
+        try (Connection con = ConnectDB.connect()) {
+            try (PreparedStatement ps =
+                         con.prepareStatement(INSERT_DB)) {
+                ps.setString(1, name);
+                ps.setString(2, lastname);
+                return ps.execute();
             }
-
-
-        } catch (SQLException se) {
-            se.printStackTrace();
         }
     }
-    @Override
-    void create() throws IOException, SQLException {
-        EmployeesAbstract em = new CRUDTableEmployees();
-        em.createTable();
-    }
 
-    @Override
-    void update() {
+    public Optional<Employees> first_select(Optional<Integer> limit) throws SQLException {
+        try (Connection con = ConnectDB.connect()) {
+            PreparedStatement pstmt = con.prepareStatement(SELECT_DB);
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                //Riga con l'id passato non trovata
+                if (!rs.next()) {
+                    return Optional.empty();
+                }
+                return Optional.of(
+                        Employees.builder()
+                                .id(id).name(rs.getString("name")).lastname(rs.getString("surname"))
+                                .build());
+            }
+        }
 
-    }
-    @Override
-    void delete() {
 
-    }
 
-    @Override
-    public void run() {
 
     }
 }
