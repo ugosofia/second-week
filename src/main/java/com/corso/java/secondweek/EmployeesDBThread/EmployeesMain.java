@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 public class EmployeesMain {
 
+
+
     public static void main(String[] args) throws SQLException, IOException {
-        EmployeesAbstract em = new CRUDTableEmployees();
-        em.create();
+        CRUDTableEmployees em = new CRUDTableEmployees();
         em.insert();
-        em.print();
+        //em.first_select();
+        //em.print();
 
 
 
