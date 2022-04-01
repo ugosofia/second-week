@@ -1,6 +1,6 @@
 package com.corso.java.secondweek.autoDB;
 
-import com.corso.java.secondweek.utils.LOG;
+import com.corso.java.secondweek.utils.Logger;
 import com.corso.java.secondweek.utils.ReadProperties;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class DBInsert implements Runnable{
 
-        static LOG L = LOG.getInstance();
+        static Logger L = Logger.getInstance();
         private Connection conn = null;
         private ReadProperties rP = new ReadProperties();
         private PreparedStatement pS;

@@ -1,6 +1,6 @@
 package com.corso.teoria.annotation;
 
-import com.corso.java.secondweek.utils.LOG;
+import com.corso.java.secondweek.utils.Logger;
 
 import java.lang.annotation.Annotation;
 
@@ -14,15 +14,15 @@ public class TestAnnotationClass {
 
         Class test = TestAnnotationClass.class;
 
-        if(test.isAnnotationPresent(TestAnnotationClass.class)) LOG.getInstance().debug("There is an annotation!");
-        else LOG.getInstance().debug("There is not an annotation");
+        if(test.isAnnotationPresent(TestAnnotationClass.class)) Logger.getInstance().debug("There is an annotation!");
+        else Logger.getInstance().debug("There is not an annotation");
         return false;
     }
     public static void main(String[] args) {
         Class test = TestAnnotationClass.class;
 
-        if(test.isAnnotationPresent(TestAnnotationClass.class)) LOG.getInstance().debug("There is an annotation!");
-        else LOG.getInstance().debug("There is not an annotation");
+        if(test.isAnnotationPresent(TestAnnotationClass.class)) Logger.getInstance().debug("There is an annotation!");
+        else Logger.getInstance().debug("There is not an annotation");
 
         Class c = TestAnnotationClass.class;
         Annotation[] a = c.getAnnotations();

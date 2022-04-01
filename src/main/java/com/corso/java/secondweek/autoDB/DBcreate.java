@@ -1,7 +1,7 @@
 package com.corso.java.secondweek.autoDB;
 
 
-import com.corso.java.secondweek.utils.LOG;
+import com.corso.java.secondweek.utils.Logger;
 import com.corso.java.secondweek.utils.ReadProperties;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class DBcreate implements Runnable{
     private Connection conn;
     private Statement statement;
     private ReadProperties rp = new ReadProperties();
-    static LOG L = LOG.getInstance();
+    static Logger L = Logger.getInstance();
 
     public void run()  {
         try {
