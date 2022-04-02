@@ -1,7 +1,8 @@
 package com.corso.java.secondweek.dbthread;
 
-import com.corso.java.secondweek.utils.DBConnection;
+import com.corso.java.secondweek.utils.ConnectDB;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -11,8 +12,8 @@ public class DBinsert implements Runnable {
 
     }
 
-    public void insertDB() throws SQLException {
-        Statement statement = DBConnection.connect();
+    public void insertDB() throws SQLException, IOException, ClassNotFoundException {
+        Statement statement = (Statement) ConnectDB.connect();
         statement.execute("");
     }
 }

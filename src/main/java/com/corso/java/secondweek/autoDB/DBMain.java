@@ -1,6 +1,5 @@
 package com.corso.java.secondweek.autoDB;
 
-import com.corso.java.secondweek.utils.DBConnection;
 import com.corso.java.secondweek.utils.DBConstant;
 
 import java.sql.Connection;

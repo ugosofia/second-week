@@ -1,7 +1,6 @@
 package com.corso.java.secondweek.dbthread;
 
-import com.corso.java.secondweek.utils.DBConnection;
-import com.corso.java.secondweek.utils.ReadProperties;
+import com.corso.java.secondweek.utils.ConnectDB;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,12 +14,14 @@ public class DBcreate implements Runnable{
             this.createDB();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    public void createDB() throws IOException, SQLException {
+    public void createDB() throws IOException, SQLException, ClassNotFoundException {
 
-        Statement statement = DBConnection.connect();
+        Statement statement = (Statement) ConnectDB.connect();
 
         statement.executeUpdate("CREATE TABLE `EXAMPLE`.`anagrafe` (\n" +
                 "  `id` INT NOT NULL,\n" +

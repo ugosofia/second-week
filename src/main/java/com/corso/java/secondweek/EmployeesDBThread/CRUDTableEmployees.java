@@ -17,7 +17,7 @@ public class CRUDTableEmployees {
     private final static String SELECT_DB1 = "SELECT * FROM employees ORDER BY surname, name";
 
     Scanner in = new Scanner(System.in);
-    private String query;
+
     private PreparedStatement pS;
     int id;
     String name, lastname;
@@ -47,7 +47,7 @@ public class CRUDTableEmployees {
             PreparedStatement pstmt = con.prepareStatement(SELECT_DB);
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
-                //Riga con l'id passato non trovata
+
                 if (!rs.next()) {
                     return Optional.empty();
                 }

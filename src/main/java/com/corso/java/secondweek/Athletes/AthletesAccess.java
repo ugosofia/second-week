@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 public class AthletesAccess implements BaseRepository<Integer>{
 
+    Connection conn;
+    PreparedStatement ps;
+    ResultSet rs;
     Scanner in = new Scanner(System.in);
     private static final String SELECT_ATHLETE = "SELECT * FROM employees WHERE id = ?";
     private static final String INSERT_ATHLETE = "INSERT INTO employees (code, name, nation, country, birth_date, height) values (?, ?, ?, ?, ?, ?)";
@@ -16,17 +19,13 @@ public class AthletesAccess implements BaseRepository<Integer>{
 
     @Override
     public boolean persist() {
-        Connection conn = null;
-        Boolean b = false;
+        boolean b = false;
         try {
             conn = ConnectDB.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException | IOException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-        PreparedStatement ps =
-                null;
+
         try {
             ps = conn.prepareStatement(INSERT_ATHLETE);
         } catch (SQLException e) {
@@ -47,10 +46,9 @@ public class AthletesAccess implements BaseRepository<Integer>{
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         try {
-            close(conn, ps, null);
+            close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,25 +62,25 @@ public class AthletesAccess implements BaseRepository<Integer>{
             throw new IllegalArgumentException(
                     "L'atleta passato come parametro è null");
         }
-        Connection con = null;
+
         try {
-            con = ConnectDB.connect();
+            conn = ConnectDB.connect();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-        PreparedStatement ps = con.prepareStatement(SELECT_ATHLETE);
+        ps = conn.prepareStatement(SELECT_ATHLETE);
 
                 ps.setInt(1, athlete.getCode());
-                ResultSet rs = ps.executeQuery() ;
+                rs = ps.executeQuery() ;
 
                     if (!rs.next()) {
-                        close(con, ps, rs);
+                        close();
                         return false;
                     }
                     rs.deleteRow();
-                    close(con, ps, rs);
+                    close();
                     return true;
     }
 
@@ -111,7 +109,7 @@ public class AthletesAccess implements BaseRepository<Integer>{
 
 
 
-    public void close(Connection conn, Statement s, ResultSet rs) throws SQLException {
+    public void close() throws SQLException {
         if (conn!= null) {
             try {
                 conn.close();
@@ -119,9 +117,9 @@ public class AthletesAccess implements BaseRepository<Integer>{
                 e.printStackTrace();
             }
         }
-        if (s!= null) {
+        if (ps!= null) {
             try {
-                s.close();
+                ps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
